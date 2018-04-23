@@ -32,11 +32,9 @@ public class StampViewerFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val array = ArrayList<String>()
-        array.add("A")
-        array.add("B")
-        array.add("C")
-        val adapter = StampListAdapter(activity, array)
+        // TODO "recycle（）の処理の警告に対応する"
+        val images = resources.obtainTypedArray(R.array.stamp_blue)
+        val adapter = StampListAdapter(activity, images)
         rvStampList?.adapter = adapter
     }
 

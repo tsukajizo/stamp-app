@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">StampApp</string>
+    <string name="image_name_stamp">Image for stamp</string>
 </resources>
