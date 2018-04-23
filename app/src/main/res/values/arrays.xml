@@ -11,4 +11,16 @@
         <item>@drawable/red_stamp_8</item>
         <item>@drawable/red_stamp_9</item>
     </array>
+
+    <array name="stamp_blue">
+        <item>@drawable/blue_stamp_1</item>
+        <item>@drawable/blue_stamp_2</item>
+        <item>@drawable/blue_stamp_3</item>
+        <item>@drawable/blue_stamp_4</item>
+        <item>@drawable/blue_stamp_5</item>
+        <item>@drawable/blue_stamp_6</item>
+        <item>@drawable/blue_stamp_7</item>
+        <item>@drawable/blue_stamp_8</item>
+        <item>@drawable/blue_stamp_9</item>
+    </array>
 </resources>
