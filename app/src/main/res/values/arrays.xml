@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="stamp_red">
+        <item>@drawable/red_stamp_1</item>
+        <item>@drawable/red_stamp_2</item>
+        <item>@drawable/red_stamp_3</item>
+        <item>@drawable/red_stamp_4</item>
+        <item>@drawable/red_stamp_5</item>
+        <item>@drawable/red_stamp_6</item>
+        <item>@drawable/red_stamp_7</item>
+        <item>@drawable/red_stamp_8</item>
+        <item>@drawable/red_stamp_9</item>
+    </array>
+</resources>
