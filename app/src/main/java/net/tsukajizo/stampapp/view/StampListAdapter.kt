@@ -1,4 +1,4 @@
-package net.tsukajizo.stampapp
+package net.tsukajizo.stampapp.view
 
 import android.content.Context
 import android.content.res.TypedArray
@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.stamp_list_item.view.*
+import net.tsukajizo.stampapp.R
 
 public class StampListAdapter(private val ctx: Context, private val list: TypedArray) : RecyclerView.Adapter<StampListAdapter.ViewHolder>() {
 
@@ -21,7 +22,6 @@ public class StampListAdapter(private val ctx: Context, private val list: TypedA
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         if (list.length() > position) {
-
             val drawable = list.getDrawable(position)
             holder?.imageView?.setImageDrawable(drawable)
         }
