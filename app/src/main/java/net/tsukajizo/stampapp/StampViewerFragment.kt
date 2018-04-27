@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_stamp_vewier.view.*
+import net.tsukajizo.stampapp.data.Stamp
 import net.tsukajizo.stampapp.view.StampListAdapter
 import net.tsukajizo.stampapp.view.StampListItemDecoration
 
@@ -36,11 +37,21 @@ public class StampViewerFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        // TODO "recycle（）の処理の警告に対応する"
-        val images = resources.obtainTypedArray(R.array.stamp_blue)
-        val adapter = StampListAdapter(activity, images, object : StampListAdapter.OnItemClickListener {
-            override fun onClick(position: Int) {
-                Toast.makeText(activity, "position:$position", Toast.LENGTH_LONG).show()
+        val stampList: List<Stamp> = listOf(
+                Stamp(0, "Stamp 1", "スタンプ1です"),
+                Stamp(1, "Stamp 2", "スタンプ2です"),
+                Stamp(2, "Stamp 3", "スタンプ3です"),
+                Stamp(3, "Stamp 4", "スタンプ4です"),
+                Stamp(4, "Stamp 5", "スタンプ5です"),
+                Stamp(5, "Stamp 6", "スタンプ6です"),
+                Stamp(6, "Stamp 7", "スタンプ7です"),
+                Stamp(7, "Stamp 8", "スタンプ8です"),
+                Stamp(8, "Stamp 9", "スタンプ9です")
+        )
+
+        val adapter = StampListAdapter(activity, stampList, object : StampListAdapter.OnItemClickListener {
+            override fun onClick(item: Stamp) {
+                Toast.makeText(activity, "label:${item.label} , desc:${item.desc}", Toast.LENGTH_LONG).show()
             }
         })
         rvStampList?.adapter = adapter
