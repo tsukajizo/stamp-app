@@ -37,16 +37,21 @@ public class StampViewerFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        // DummyCode
+        val stamp1 = Stamp(0, "Stamp 1", "スタンプ1です")
+        val stamp2 = Stamp(1, "Stamp 2", "スタンプ2です")
+        val stamp3 = Stamp(2, "Stamp 3", "スタンプ3です")
+        val stamp4 = Stamp(3, "Stamp 4", "スタンプ4です")
+        val stamp5 = Stamp(4, "Stamp 5", "スタンプ5です")
+        val stamp6 = Stamp(5, "Stamp 6", "スタンプ6です")
+        val stamp7 = Stamp(6, "Stamp 7", "スタンプ7です")
+        val stamp8 = Stamp(7, "Stamp 8", "スタンプ8です")
+        val stamp9 = Stamp(8, "Stamp 9", "スタンプ9です")
+        stamp6.getStamp()
+        stamp8.getStamp()
         val stampList: List<Stamp> = listOf(
-                Stamp(0, "Stamp 1", "スタンプ1です"),
-                Stamp(1, "Stamp 2", "スタンプ2です"),
-                Stamp(2, "Stamp 3", "スタンプ3です"),
-                Stamp(3, "Stamp 4", "スタンプ4です"),
-                Stamp(4, "Stamp 5", "スタンプ5です"),
-                Stamp(5, "Stamp 6", "スタンプ6です"),
-                Stamp(6, "Stamp 7", "スタンプ7です"),
-                Stamp(7, "Stamp 8", "スタンプ8です"),
-                Stamp(8, "Stamp 9", "スタンプ9です")
+                stamp1, stamp2, stamp3, stamp4, stamp5, stamp6, stamp7, stamp8, stamp9
         )
 
         val adapter = StampListAdapter(activity, stampList, object : StampListAdapter.OnItemClickListener {

@@ -22,10 +22,12 @@ public class StampListAdapter(private val ctx: Context, private val list: List<S
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         if (list.size > position) {
-            val drawable = list.get(position).getStampDrawable(ctx)
-            holder?.imageView?.setImageDrawable(drawable)
-            holder?.view?.setOnClickListener({ itemClickListener.onClick(list.get(position)) })
-
+            val stamp = list[position]
+            if (stamp.isGathered) {
+                val drawable = list.get(position).getStampDrawable(ctx)
+                holder?.imageView?.setImageDrawable(drawable)
+                holder?.view?.setOnClickListener({ itemClickListener.onClick(stamp) })
+            }
         }
     }
 
