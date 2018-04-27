@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_stamp_vewier.view.*
 import net.tsukajizo.stampapp.view.StampListAdapter
 import net.tsukajizo.stampapp.view.StampListItemDecoration
@@ -37,7 +38,11 @@ public class StampViewerFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         // TODO "recycle（）の処理の警告に対応する"
         val images = resources.obtainTypedArray(R.array.stamp_blue)
-        val adapter = StampListAdapter(activity, images)
+        val adapter = StampListAdapter(activity, images, object : StampListAdapter.OnItemClickListener {
+            override fun onClick(position: Int) {
+                Toast.makeText(activity, "position:$position", Toast.LENGTH_LONG).show()
+            }
+        })
         rvStampList?.adapter = adapter
     }
 

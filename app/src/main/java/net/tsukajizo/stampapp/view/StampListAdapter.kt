@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.stamp_list_item.view.*
 import net.tsukajizo.stampapp.R
 
-public class StampListAdapter(private val ctx: Context, private val list: TypedArray) : RecyclerView.Adapter<StampListAdapter.ViewHolder>() {
+public class StampListAdapter(private val ctx: Context, private val list: TypedArray, private val itemClickListener: OnItemClickListener) : RecyclerView.Adapter<StampListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(ctx)
@@ -24,11 +24,18 @@ public class StampListAdapter(private val ctx: Context, private val list: TypedA
         if (list.length() > position) {
             val drawable = list.getDrawable(position)
             holder?.imageView?.setImageDrawable(drawable)
+            holder?.view?.setOnClickListener({ itemClickListener.onClick(position) })
+
         }
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val view = itemView
         val imageView = itemView.iv_stamp
 
+    }
+
+    interface OnItemClickListener {
+        fun onClick(position: Int)
     }
 }
