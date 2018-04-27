@@ -31,7 +31,7 @@ public class StampListAdapter(private val ctx: Context, private val list: List<S
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val view = itemView
-        val imageView = itemView.iv_stamp
+        val imageView = itemView.iv_stamp!!
 
     }
 
