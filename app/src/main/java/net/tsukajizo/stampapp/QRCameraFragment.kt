@@ -1,5 +1,7 @@
 package net.tsukajizo.stampapp
 
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -13,10 +15,7 @@ import com.journeyapps.barcodescanner.BarcodeResult
 import com.journeyapps.barcodescanner.DecoratedBarcodeView
 import kotlinx.android.synthetic.main.fragment_qr_camera.view.*
 import net.tsukajizo.stampapp.error.ParseCodeException
-import net.tsukajizo.stampapp.util.AppScheme
-import net.tsukajizo.stampapp.util.PermissionCallback
-import net.tsukajizo.stampapp.util.checkPermission
-import net.tsukajizo.stampapp.util.parseIdFromCode
+import net.tsukajizo.stampapp.util.*
 
 
 class QRCameraFragment : Fragment() {
@@ -79,8 +78,15 @@ class QRCameraFragment : Fragment() {
         }
         if (id == AppScheme.UNKNOWN_STAMP_ID) {
             Toast.makeText(activity, "Code not found!", Toast.LENGTH_LONG).show()
+            barcodeView?.resume()
         } else {
             Toast.makeText(activity, "Code found!", Toast.LENGTH_LONG).show()
+            val data = Intent()
+            val bundle = Bundle()
+            bundle.putInt(Constant.BUNDLE_KEY_STAMP_ID, id)
+            data.putExtras(bundle)
+            activity.setResult(Activity.RESULT_OK, data)
+            activity.finish()
         }
     }
 

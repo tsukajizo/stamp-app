@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import net.tsukajizo.stampapp.util.Constant
 
 
 class MainActivity : AppCompatActivity() {
@@ -36,6 +37,22 @@ class MainActivity : AppCompatActivity() {
             startGetStampActivity()
         })
         setFragment(StampViewerFragment.newInstance())
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            REQ_GET_STAMP -> {
+                val fragment = StampViewerFragment.newInstance()
+                if (data != null) {
+                    val stampId = data.getIntExtra(Constant.BUNDLE_KEY_STAMP_ID, Constant.UNDEFINED_STAMP_ID)
+                    val bundle = Bundle()
+                    bundle.putInt(Constant.BUNDLE_KEY_STAMP_ID, stampId)
+                    fragment.arguments = bundle
+                }
+                setFragment(fragment)
+            }
+        }
     }
 
     private fun startGetStampActivity() {

@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_stamp_vewier.view.*
 import net.tsukajizo.stampapp.data.Stamp
+import net.tsukajizo.stampapp.util.Constant
 import net.tsukajizo.stampapp.view.StampListAdapter
 import net.tsukajizo.stampapp.view.StampListItemDecoration
 
@@ -60,6 +61,11 @@ class StampViewerFragment : Fragment() {
             }
         })
         rvStampList?.adapter = adapter
+
+        val stampId = arguments.getInt(Constant.BUNDLE_KEY_STAMP_ID, Constant.UNDEFINED_STAMP_ID)
+        if (stampId != Constant.UNDEFINED_STAMP_ID) {
+            Toast.makeText(activity, "新しいスタンプをGET!", Toast.LENGTH_SHORT).show()
+        }
     }
 
 }
