@@ -15,7 +15,7 @@ import net.tsukajizo.stampapp.view.StampListAdapter
 import net.tsukajizo.stampapp.view.StampListItemDecoration
 
 
-public class StampViewerFragment : Fragment() {
+class StampViewerFragment : Fragment() {
     var rvStampList: RecyclerView? = null
 
     companion object {

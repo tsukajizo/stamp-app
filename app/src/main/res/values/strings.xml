@@ -4,4 +4,5 @@
     <string name="bottom_menu_stamp">Stamp</string>
     <string name="bottom_menu_camera">Camera</string>
     <string name="bottom_menu_location">Map</string>
+    <string name="qr_camera_fragment_button_qr_get_label">QRコードでスタンプをGET</string>
 </resources>
