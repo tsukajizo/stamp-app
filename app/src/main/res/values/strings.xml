@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">StampApp</string>
     <string name="image_name_stamp">Image for stamp</string>
+    <string name="bottom_menu_stamp">Stamp</string>
+    <string name="bottom_menu_camera">Camera</string>
+    <string name="bottom_menu_location">Map</string>
 </resources>
