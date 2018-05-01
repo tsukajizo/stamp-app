@@ -1,5 +1,6 @@
 package net.tsukajizo.stampapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
@@ -7,6 +8,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
+    companion object {
+        const val REQ_GET_STAMP = 0
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         bottom_navigation.setOnNavigationItemSelectedListener({
             when (it.itemId) {
                 R.id.nav_camera -> {
-                    setFragment(QRCameraFragment.newInstance())
+                    setFragment(StampViewerFragment.newInstance())
                 }
                 R.id.nav_stamp -> {
                     setFragment(StampViewerFragment.newInstance())
@@ -28,7 +32,15 @@ class MainActivity : AppCompatActivity() {
             }
             true
         })
+        fab_get_stamp.setOnClickListener({
+            startGetStampActivity()
+        })
         setFragment(StampViewerFragment.newInstance())
+    }
+
+    private fun startGetStampActivity() {
+        val intent = Intent(this, StampGetActivity::class.java)
+        startActivityForResult(intent, REQ_GET_STAMP)
     }
 
     private fun setFragment(fragment: Fragment) {
