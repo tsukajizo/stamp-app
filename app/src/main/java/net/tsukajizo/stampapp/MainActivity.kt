@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        initlaizeStampData()
+        initializeStampData()
 
         bottom_navigation.setOnNavigationItemSelectedListener({
             when (it.itemId) {
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         setFragment(StampViewerFragment.newInstance())
     }
 
-    private fun initlaizeStampData() {
+    private fun initializeStampData() {
         val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, getString(R.string.db_name)).build()
         // DummyCode
         val stamp1 = Stamp(0, "Stamp 1", "スタンプ1です")
