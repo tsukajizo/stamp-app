@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">StampApp</string>
+    <string name="db_name">stamp_app.db</string>
+
+
     <string name="image_name_stamp">Image for stamp</string>
     <string name="bottom_menu_stamp">Stamp</string>
     <string name="bottom_menu_camera">Camera</string>

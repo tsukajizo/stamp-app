@@ -1,10 +1,22 @@
 package net.tsukajizo.stampapp.data
 
+import android.arch.persistence.room.ColumnInfo
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import android.content.Context
 import android.graphics.drawable.Drawable
 import net.tsukajizo.stampapp.R
 
-data class Stamp(val id: Int, val label: String, val desc: String, var gatherDate: Long = NOT_GATHER_DATE) {
+@Entity
+data class Stamp constructor(
+        @PrimaryKey(autoGenerate = true)
+        val id: Int,
+        val label: String,
+        val desc: String,
+        @ColumnInfo(name = "gather_date")
+        var gatherDate: Long = NOT_GATHER_DATE
+) {
+
     companion object {
         const val NOT_GATHER_DATE: Long = 0L
     }
@@ -24,5 +36,4 @@ data class Stamp(val id: Int, val label: String, val desc: String, var gatherDat
         images.recycle()
         return drawable
     }
-
 }
