@@ -1,6 +1,5 @@
 package net.tsukajizo.stampapp
 
-import android.arch.persistence.room.Room
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,10 +9,16 @@ import kotlinx.android.synthetic.main.activity_main.*
 import net.tsukajizo.stampapp.data.Stamp
 import net.tsukajizo.stampapp.database.AppDatabase
 import net.tsukajizo.stampapp.util.Constant
+import javax.inject.Inject
 import kotlin.concurrent.thread
 
 
 class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var db: AppDatabase
+
+
     companion object {
         const val REQ_GET_STAMP = 0
     }
@@ -21,6 +26,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        App.app()!!.appComponent()!!.inject(this)
 
         initializeStampData()
 
@@ -47,7 +54,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeStampData() {
-        val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, getString(R.string.db_name)).build()
         // DummyCode
         val stamp1 = Stamp(0, "Stamp 1", "スタンプ1です")
         val stamp2 = Stamp(0, "Stamp 2", "スタンプ2です")
