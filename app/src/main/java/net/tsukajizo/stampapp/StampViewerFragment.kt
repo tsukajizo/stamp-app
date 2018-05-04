@@ -11,13 +11,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_stamp_vewier.view.*
 import net.tsukajizo.stampapp.data.Stamp
+import net.tsukajizo.stampapp.task.ReadStampTask
 import net.tsukajizo.stampapp.util.Constant
 import net.tsukajizo.stampapp.view.StampListAdapter
 import net.tsukajizo.stampapp.view.StampListItemDecoration
+import javax.inject.Inject
 
 
 class StampViewerFragment : Fragment() {
     var rvStampList: RecyclerView? = null
+
+    @Inject
+    lateinit var readStampTask: ReadStampTask
 
     companion object {
         fun newInstance(): StampViewerFragment {
@@ -26,6 +31,11 @@ class StampViewerFragment : Fragment() {
             fragment.arguments = bundle
             return fragment
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        App.app()!!.appComponent()!!.inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -38,29 +48,16 @@ class StampViewerFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        val stampList = readStampTask.execute()
+        if (stampList != null) {
+            val adapter = StampListAdapter(activity, stampList, object : StampListAdapter.OnItemClickListener {
+                override fun onClick(item: Stamp) {
+                    Toast.makeText(activity, "label:${item.label} , desc:${item.desc}", Toast.LENGTH_LONG).show()
+                }
+            })
 
-        // DummyCode
-        val stamp1 = Stamp(0, "Stamp 1", "スタンプ1です")
-        val stamp2 = Stamp(1, "Stamp 2", "スタンプ2です")
-        val stamp3 = Stamp(2, "Stamp 3", "スタンプ3です")
-        val stamp4 = Stamp(3, "Stamp 4", "スタンプ4です")
-        val stamp5 = Stamp(4, "Stamp 5", "スタンプ5です")
-        val stamp6 = Stamp(5, "Stamp 6", "スタンプ6です")
-        val stamp7 = Stamp(6, "Stamp 7", "スタンプ7です")
-        val stamp8 = Stamp(7, "Stamp 8", "スタンプ8です")
-        val stamp9 = Stamp(8, "Stamp 9", "スタンプ9です")
-        stamp6.getStamp()
-        stamp8.getStamp()
-        val stampList: List<Stamp> = listOf(
-                stamp1, stamp2, stamp3, stamp4, stamp5, stamp6, stamp7, stamp8, stamp9
-        )
-
-        val adapter = StampListAdapter(activity, stampList, object : StampListAdapter.OnItemClickListener {
-            override fun onClick(item: Stamp) {
-                Toast.makeText(activity, "label:${item.label} , desc:${item.desc}", Toast.LENGTH_LONG).show()
-            }
-        })
-        rvStampList?.adapter = adapter
+            rvStampList?.adapter = adapter
+        }
 
         val stampId = arguments.getInt(Constant.BUNDLE_KEY_STAMP_ID, Constant.UNDEFINED_STAMP_ID)
         if (stampId != Constant.UNDEFINED_STAMP_ID) {

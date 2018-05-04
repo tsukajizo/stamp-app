@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import net.tsukajizo.stampapp.task.InitializeStampTask
+import net.tsukajizo.stampapp.task.ReadStampTask
 import net.tsukajizo.stampapp.util.Constant
 import javax.inject.Inject
 
@@ -14,6 +15,9 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var task: InitializeStampTask
+
+    @Inject
+    lateinit var readTask: ReadStampTask
 
     companion object {
         const val REQ_GET_STAMP = 0
@@ -51,6 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initializeStampData() {
         task.execute()
+        readTask.execute()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -1,5 +1,5 @@
 package net.tsukajizo.stampapp.task
 
-abstract class Task {
-    abstract fun execute()
+abstract class Task<T> {
+    abstract fun execute(): T
 }
