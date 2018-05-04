@@ -1,7 +1,7 @@
 package net.tsukajizo.stampapp.di
 
 import dagger.Component
-import net.tsukajizo.stampapp.MainActivity
+import net.tsukajizo.stampapp.App
 import net.tsukajizo.stampapp.StampViewerFragment
 import javax.inject.Singleton
 
@@ -10,6 +10,6 @@ import javax.inject.Singleton
         AppModule::class)
 )
 interface AppComponent {
-    fun inject(activity: MainActivity)
+    fun inject(app: App)
     fun inject(stampViewerFragment: StampViewerFragment)
 }

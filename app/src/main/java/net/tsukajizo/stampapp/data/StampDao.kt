@@ -5,6 +5,7 @@ import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
 import android.arch.persistence.room.Update
 
+
 @Dao
 interface StampDao {
 
@@ -16,4 +17,7 @@ interface StampDao {
 
     @Query("SELECT * FROM Stamp")
     fun findAll(): List<Stamp>
+
+    @Query("SELECT COUNT(*) FROM Stamp")
+    fun count(): Int
 }
