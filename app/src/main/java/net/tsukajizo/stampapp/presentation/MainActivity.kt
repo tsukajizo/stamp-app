@@ -1,10 +1,13 @@
-package net.tsukajizo.stampapp
+package net.tsukajizo.stampapp.presentation
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import net.tsukajizo.stampapp.R
+import net.tsukajizo.stampapp.presentation.collect.StampGetActivity
+import net.tsukajizo.stampapp.presentation.viewer.StampViewerFragment
 import net.tsukajizo.stampapp.util.Constant
 
 

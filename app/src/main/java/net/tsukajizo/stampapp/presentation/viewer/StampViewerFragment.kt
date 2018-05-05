@@ -1,4 +1,4 @@
-package net.tsukajizo.stampapp
+package net.tsukajizo.stampapp.presentation.viewer
 
 
 import android.os.Bundle
@@ -10,13 +10,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_stamp_vewier.view.*
+import net.tsukajizo.stampapp.App
+import net.tsukajizo.stampapp.R
 import net.tsukajizo.stampapp.data.Stamp
 import net.tsukajizo.stampapp.task.ReadStampTask
 import net.tsukajizo.stampapp.task.TaskSuccessListener
 import net.tsukajizo.stampapp.task.UpdateGetStampTask
 import net.tsukajizo.stampapp.util.Constant
-import net.tsukajizo.stampapp.view.StampListAdapter
-import net.tsukajizo.stampapp.view.StampListItemDecoration
 import javax.inject.Inject
 
 

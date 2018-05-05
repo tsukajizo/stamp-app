@@ -1,8 +1,9 @@
-package net.tsukajizo.stampapp
+package net.tsukajizo.stampapp.presentation.collect
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import net.tsukajizo.stampapp.R
 
 class StampGetActivity : AppCompatActivity() {
 

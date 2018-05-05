@@ -1,4 +1,4 @@
-package net.tsukajizo.stampapp.view
+package net.tsukajizo.stampapp.presentation.viewer
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

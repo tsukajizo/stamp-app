@@ -1,4 +1,4 @@
-package net.tsukajizo.stampapp
+package net.tsukajizo.stampapp.presentation.collect
 
 import android.app.Activity
 import android.content.Intent
@@ -14,6 +14,7 @@ import com.journeyapps.barcodescanner.BarcodeCallback
 import com.journeyapps.barcodescanner.BarcodeResult
 import com.journeyapps.barcodescanner.DecoratedBarcodeView
 import kotlinx.android.synthetic.main.fragment_qr_camera.view.*
+import net.tsukajizo.stampapp.R
 import net.tsukajizo.stampapp.error.ParseCodeException
 import net.tsukajizo.stampapp.util.*
 
