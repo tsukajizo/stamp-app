@@ -12,6 +12,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_stamp_vewier.view.*
 import net.tsukajizo.stampapp.data.Stamp
 import net.tsukajizo.stampapp.task.ReadStampTask
+import net.tsukajizo.stampapp.task.UpdateGetStampTask
 import net.tsukajizo.stampapp.util.Constant
 import net.tsukajizo.stampapp.view.StampListAdapter
 import net.tsukajizo.stampapp.view.StampListItemDecoration
@@ -19,10 +20,13 @@ import javax.inject.Inject
 
 
 class StampViewerFragment : Fragment() {
-    var rvStampList: RecyclerView? = null
+    private var rvStampList: RecyclerView? = null
 
     @Inject
     lateinit var readStampTask: ReadStampTask
+
+    @Inject
+    lateinit var updateGetStampTask: UpdateGetStampTask
 
     companion object {
         fun newInstance(): StampViewerFragment {
@@ -61,8 +65,9 @@ class StampViewerFragment : Fragment() {
 
         val stampId = arguments.getInt(Constant.BUNDLE_KEY_STAMP_ID, Constant.UNDEFINED_STAMP_ID)
         if (stampId != Constant.UNDEFINED_STAMP_ID) {
+            updateGetStampTask.stampId = stampId
+            updateGetStampTask.execute()
             Toast.makeText(activity, "新しいスタンプをGET!", Toast.LENGTH_SHORT).show()
         }
     }
-
 }

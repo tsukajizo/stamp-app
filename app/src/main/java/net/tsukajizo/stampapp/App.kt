@@ -16,7 +16,6 @@ class App : Application() {
     companion object {
         private var app: App? = null
 
-
         fun app(): App? {
             return app
         }
