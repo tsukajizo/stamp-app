@@ -54,10 +54,10 @@ class StampViewerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         readStampTask.setListener(object : TaskSuccessListener<List<Stamp>?> {
-            override fun onSuccess(t: List<Stamp>?) {
-                super.onSuccess(t)
-                if (t != null) {
-                    updateStamp(t)
+            override fun onSuccess(result: List<Stamp>?) {
+                super.onSuccess(result)
+                if (result != null) {
+                    updateStamp(result)
                 }
             }
         })
@@ -66,10 +66,10 @@ class StampViewerFragment : Fragment() {
         val stampId = arguments.getInt(Constant.BUNDLE_KEY_STAMP_ID, Constant.UNDEFINED_STAMP_ID)
         if (stampId != Constant.UNDEFINED_STAMP_ID) {
             updateGetStampTask.setListener(object : TaskSuccessListener<List<Stamp>?> {
-                override fun onSuccess(t: List<Stamp>?) {
-                    super.onSuccess(t)
-                    if (t != null) {
-                        updateStamp(t)
+                override fun onSuccess(result: List<Stamp>?) {
+                    super.onSuccess(result)
+                    if (result != null) {
+                        updateStamp(result)
                     }
                 }
             })
