@@ -1,23 +1,27 @@
 package net.tsukajizo.stampapp.task
 
-import kotlinx.coroutines.experimental.async
+import android.os.AsyncTask
 import net.tsukajizo.stampapp.data.Stamp
 import net.tsukajizo.stampapp.database.AppDatabase
 import javax.inject.Inject
 
-class UpdateGetStampTask @Inject constructor(private val db: AppDatabase) : Task<List<Stamp>?>() {
+class UpdateGetStampTask @Inject constructor(private val db: AppDatabase) : AsyncTask<Int, Unit, List<Stamp>?>() {
+    private var successListener: TaskSuccessListener<List<Stamp>?>? = null
+    override fun doInBackground(vararg stampIds: Int?): List<Stamp>? {
+        val stampId = stampIds[0]!!
+        val stamp = db.stampDao().find(stampId)
+        stamp.getStamp()
+        db.stampDao().updateStamp(stamp)
+        return db.stampDao().findAll()
+    }
 
-    var stampId: Int = 0
+    override fun onPostExecute(result: List<Stamp>?) {
+        super.onPostExecute(result)
+        successListener!!.onSuccess(result)
+    }
 
-    override fun execute(): List<Stamp>? {
-        var stampList: List<Stamp>? = null
-        async {
-            val stamp = db.stampDao().find(stampId)
-            stamp.getStamp()
-            db.stampDao().updateStamp(stamp)
-            stampList = db.stampDao().findAll()
-        }
-        return stampList
+    fun setListener(listener: TaskSuccessListener<List<Stamp>?>) {
+        this.successListener = listener
     }
 
 }

@@ -1,7 +1,5 @@
 package net.tsukajizo.stampapp.task
 
-abstract class Task<T> {
-    abstract fun execute(): T
-
-
+interface TaskSuccessListener<in T> {
+    fun onSuccess(t: T) {}
 }

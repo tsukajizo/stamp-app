@@ -12,6 +12,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_stamp_vewier.view.*
 import net.tsukajizo.stampapp.data.Stamp
 import net.tsukajizo.stampapp.task.ReadStampTask
+import net.tsukajizo.stampapp.task.TaskSuccessListener
 import net.tsukajizo.stampapp.task.UpdateGetStampTask
 import net.tsukajizo.stampapp.util.Constant
 import net.tsukajizo.stampapp.view.StampListAdapter
@@ -52,22 +53,37 @@ class StampViewerFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val stampList = readStampTask.execute()
-        if (stampList != null) {
-            val adapter = StampListAdapter(activity, stampList, object : StampListAdapter.OnItemClickListener {
-                override fun onClick(item: Stamp) {
-                    Toast.makeText(activity, "label:${item.label} , desc:${item.desc}", Toast.LENGTH_LONG).show()
+        readStampTask.setListener(object : TaskSuccessListener<List<Stamp>?> {
+            override fun onSuccess(t: List<Stamp>?) {
+                super.onSuccess(t)
+                if (t != null) {
+                    updateStamp(t)
                 }
-            })
-
-            rvStampList?.adapter = adapter
-        }
+            }
+        })
+        readStampTask.execute()
 
         val stampId = arguments.getInt(Constant.BUNDLE_KEY_STAMP_ID, Constant.UNDEFINED_STAMP_ID)
         if (stampId != Constant.UNDEFINED_STAMP_ID) {
-            updateGetStampTask.stampId = stampId
-            updateGetStampTask.execute()
+            updateGetStampTask.setListener(object : TaskSuccessListener<List<Stamp>?> {
+                override fun onSuccess(t: List<Stamp>?) {
+                    super.onSuccess(t)
+                    if (t != null) {
+                        updateStamp(t)
+                    }
+                }
+            })
+            updateGetStampTask.execute(stampId)
             Toast.makeText(activity, "新しいスタンプをGET!", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun updateStamp(stampList: List<Stamp>) {
+        val adapter = StampListAdapter(activity, stampList, object : StampListAdapter.OnItemClickListener {
+            override fun onClick(item: Stamp) {
+                Toast.makeText(activity, "label:${item.label} , desc:${item.desc}", Toast.LENGTH_LONG).show()
+            }
+        })
+        rvStampList?.adapter = adapter
     }
 }

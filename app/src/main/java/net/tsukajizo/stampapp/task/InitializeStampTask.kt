@@ -1,12 +1,14 @@
 package net.tsukajizo.stampapp.task
 
+import android.os.AsyncTask
 import kotlinx.coroutines.experimental.async
 import net.tsukajizo.stampapp.data.Stamp
 import net.tsukajizo.stampapp.database.AppDatabase
 import javax.inject.Inject
 
-class InitializeStampTask @Inject constructor(private val db: AppDatabase) : Task<Unit>() {
-    override fun execute() {
+class InitializeStampTask @Inject constructor(private val db: AppDatabase) : AsyncTask<Unit, Unit, Unit>() {
+
+    override fun doInBackground(vararg parmas: Unit) {
         async {
             if (db.stampDao().count() == 0) {
                 val stamp1 = Stamp(0, "Stamp 1", "スタンプ1です")
