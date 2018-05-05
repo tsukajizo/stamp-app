@@ -17,15 +17,13 @@ class InitializeStampTask @Inject constructor(private val db: AppDatabase) : Asy
         async {
             if (db.stampDao().count() == 0) {
                 // JSON データを assets から取得
-                val jsondata = App.app()?.resources?.assets?.open("stamp_list.json")?.reader(charset = Charsets.UTF_8).use { it?.readText() }
-                if (jsondata == null) {
-                    throw Exception("asset not found")
-                }
+                val json = App.app()?.resources?.assets?.open("stamp_list.json")?.reader(charset = Charsets.UTF_8).use { it?.readText() }
+                        ?: throw Exception("asset not found")
                 val type = Types.newParameterizedType(List::class.java, Stamp::class.java)
                 val moshi = Moshi.Builder().build()!!
                 val adapter: JsonAdapter<List<Stamp>> = moshi.adapter(type)
-                val stamp_list = adapter.fromJson(jsondata)
-                stamp_list?.forEach { stamp ->
+                val stampList = adapter.fromJson(json)
+                stampList?.forEach { stamp ->
                     db.stampDao().insertStamp(stamp)
                 }
             }
