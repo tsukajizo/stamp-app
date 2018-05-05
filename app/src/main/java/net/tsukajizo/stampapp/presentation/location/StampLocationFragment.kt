@@ -52,7 +52,7 @@ class StampLocationFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap?) {
         // カメラを移動
-        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(SHIBUYA, 5f))
+        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(SHIBUYA, 13f))
         readStampTask.setListener(object : TaskListener<List<Stamp>?> {
             override fun onSuccess(result: List<Stamp>?) {
                 super.onSuccess(result)
@@ -69,6 +69,6 @@ class StampLocationFragment : Fragment(), OnMapReadyCallback {
     private fun addMarker(map: GoogleMap?, stamp: Stamp) {
         map?.addMarker(MarkerOptions()
                 .position(LatLng(stamp.latitude, stamp.longitude))
-                .title("Marker"))
+                .title(stamp.label))
     }
 }
