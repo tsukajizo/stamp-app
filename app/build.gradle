@@ -22,6 +22,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    defaultConfig{
+        def properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        def API_KEY = properties.getProperty("api_key")
+        resValue "string" , "google_map_api_key" , "${API_KEY}"
+    }
 }
 
 dependencies {

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import net.tsukajizo.stampapp.R
 import net.tsukajizo.stampapp.presentation.collect.StampGetActivity
@@ -22,7 +23,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        val appKey = resources.getString(R.string.google_maps_key)
+        Toast.makeText(this, "config$appKey", Toast.LENGTH_LONG).show()
         bottom_navigation.setOnNavigationItemSelectedListener({
             when (it.itemId) {
                 R.id.nav_camera -> {
