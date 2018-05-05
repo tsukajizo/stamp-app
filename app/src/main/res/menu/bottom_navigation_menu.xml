@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/nav_stamp"
-        android:icon="@drawable/ic_stamp_list_black_24dp"
-        android:title="@string/bottom_menu_stamp" />
-    <item
         android:id="@+id/nav_camera"
         android:icon="@drawable/ic_camera_alt_white_24dp"
         android:title="@string/bottom_menu_camera" />
+    <item
+        android:id="@+id/nav_stamp"
+        android:icon="@drawable/ic_stamp_list_black_24dp"
+        android:title="@string/bottom_menu_stamp" />
+
     <item
         android:id="@+id/nav_map"
         android:icon="@drawable/ic_location_black_24dp"

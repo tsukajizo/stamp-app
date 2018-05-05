@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import net.tsukajizo.stampapp.R
 import net.tsukajizo.stampapp.presentation.collect.StampGetActivity
+import net.tsukajizo.stampapp.presentation.title.TitleStampRallyFragment
 import net.tsukajizo.stampapp.presentation.viewer.StampViewerFragment
 import net.tsukajizo.stampapp.util.Constant
 
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         bottom_navigation.setOnNavigationItemSelectedListener({
             when (it.itemId) {
                 R.id.nav_camera -> {
-                    setFragment(StampViewerFragment.newInstance())
+                    setFragment(TitleStampRallyFragment.newInstance())
                 }
                 R.id.nav_stamp -> {
                     setFragment(StampViewerFragment.newInstance())
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         fab_get_stamp.setOnClickListener({
             startGetStampActivity()
         })
-        setFragment(StampViewerFragment.newInstance())
+        setFragment(TitleStampRallyFragment.newInstance())
     }
 
 
