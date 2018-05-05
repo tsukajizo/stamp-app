@@ -13,6 +13,9 @@ data class Stamp constructor(
         val id: Int,
         val label: String,
         val desc: String,
+        val latitude: Double,
+        val longitude: Double,
+
         @ColumnInfo(name = "gather_date")
         var gatherDate: Long = NOT_GATHER_DATE
 ) {

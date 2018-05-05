@@ -11,15 +11,15 @@ class InitializeStampTask @Inject constructor(private val db: AppDatabase) : Asy
     override fun doInBackground(vararg parmas: Unit) {
         async {
             if (db.stampDao().count() == 0) {
-                val stamp1 = Stamp(0, "Stamp 1", "スタンプ1です")
-                val stamp2 = Stamp(0, "Stamp 2", "スタンプ2です")
-                val stamp3 = Stamp(0, "Stamp 3", "スタンプ3です")
-                val stamp4 = Stamp(0, "Stamp 4", "スタンプ4です")
-                val stamp5 = Stamp(0, "Stamp 5", "スタンプ5です")
-                val stamp6 = Stamp(0, "Stamp 6", "スタンプ6です")
-                val stamp7 = Stamp(0, "Stamp 7", "スタンプ7です")
-                val stamp8 = Stamp(0, "Stamp 8", "スタンプ8です")
-                val stamp9 = Stamp(0, "Stamp 9", "スタンプ9です")
+                val stamp1 = Stamp(0, "Stamp 1", "スタンプ1です", 35.6590746, 139.6984292)
+                val stamp2 = Stamp(0, "Stamp 2", "スタンプ2です", 36.6590746, 139.6984292)
+                val stamp3 = Stamp(0, "Stamp 3", "スタンプ3です", 37.6590746, 139.6984292)
+                val stamp4 = Stamp(0, "Stamp 4", "スタンプ4です", 38.6590746, 139.6984292)
+                val stamp5 = Stamp(0, "Stamp 5", "スタンプ5です", 39.6590746, 139.6984292)
+                val stamp6 = Stamp(0, "Stamp 6", "スタンプ6です", 40.6590746, 139.6984292)
+                val stamp7 = Stamp(0, "Stamp 7", "スタンプ7です", 41.6590746, 139.6984292)
+                val stamp8 = Stamp(0, "Stamp 8", "スタンプ8です", 42.6590746, 139.6984292)
+                val stamp9 = Stamp(0, "Stamp 9", "スタンプ9です", 43.6590746, 139.6984292)
 
                 db.stampDao().insertStamp(stamp1)
                 db.stampDao().insertStamp(stamp2)
