@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import net.tsukajizo.stampapp.R
 import net.tsukajizo.stampapp.presentation.collect.StampGetActivity
+import net.tsukajizo.stampapp.presentation.location.StampLocationFragment
 import net.tsukajizo.stampapp.presentation.title.TitleStampRallyFragment
 import net.tsukajizo.stampapp.presentation.viewer.StampViewerFragment
 import net.tsukajizo.stampapp.util.Constant
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                     setFragment(StampViewerFragment.newInstance())
                 }
                 R.id.nav_map -> {
-                    setFragment(StampViewerFragment.newInstance())
+                    setFragment(StampLocationFragment.newInstance())
                 }
                 else -> {
                 }
