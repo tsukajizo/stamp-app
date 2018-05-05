@@ -6,7 +6,7 @@ import net.tsukajizo.stampapp.database.AppDatabase
 import javax.inject.Inject
 
 class UpdateGetStampTask @Inject constructor(private val db: AppDatabase) : AsyncTask<Int, Unit, List<Stamp>?>() {
-    private var successListener: TaskSuccessListener<List<Stamp>?>? = null
+    private var listener: TaskListener<List<Stamp>?>? = null
     override fun doInBackground(vararg stampIds: Int?): List<Stamp>? {
         val stampId = stampIds[0]!!
         val stamp = db.stampDao().find(stampId)
@@ -17,11 +17,11 @@ class UpdateGetStampTask @Inject constructor(private val db: AppDatabase) : Asyn
 
     override fun onPostExecute(result: List<Stamp>?) {
         super.onPostExecute(result)
-        successListener!!.onSuccess(result)
+        listener!!.onSuccess(result)
     }
 
-    fun setListener(listener: TaskSuccessListener<List<Stamp>?>) {
-        this.successListener = listener
+    fun setListener(listener: TaskListener<List<Stamp>?>) {
+        this.listener = listener
     }
 
 }

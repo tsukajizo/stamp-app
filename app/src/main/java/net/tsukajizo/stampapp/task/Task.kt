@@ -1,5 +1,5 @@
 package net.tsukajizo.stampapp.task
 
-interface TaskSuccessListener<in T> {
+interface TaskListener<in T> {
     fun onSuccess(result: T) {}
 }

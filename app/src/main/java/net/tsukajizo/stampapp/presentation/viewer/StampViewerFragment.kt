@@ -14,7 +14,7 @@ import net.tsukajizo.stampapp.App
 import net.tsukajizo.stampapp.R
 import net.tsukajizo.stampapp.data.Stamp
 import net.tsukajizo.stampapp.task.ReadStampTask
-import net.tsukajizo.stampapp.task.TaskSuccessListener
+import net.tsukajizo.stampapp.task.TaskListener
 import net.tsukajizo.stampapp.task.UpdateGetStampTask
 import net.tsukajizo.stampapp.util.Constant
 import javax.inject.Inject
@@ -53,7 +53,7 @@ class StampViewerFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        readStampTask.setListener(object : TaskSuccessListener<List<Stamp>?> {
+        readStampTask.setListener(object : TaskListener<List<Stamp>?> {
             override fun onSuccess(result: List<Stamp>?) {
                 super.onSuccess(result)
                 if (result != null) {
@@ -65,7 +65,7 @@ class StampViewerFragment : Fragment() {
 
         val stampId = arguments.getInt(Constant.BUNDLE_KEY_STAMP_ID, Constant.UNDEFINED_STAMP_ID)
         if (stampId != Constant.UNDEFINED_STAMP_ID) {
-            updateGetStampTask.setListener(object : TaskSuccessListener<List<Stamp>?> {
+            updateGetStampTask.setListener(object : TaskListener<List<Stamp>?> {
                 override fun onSuccess(result: List<Stamp>?) {
                     super.onSuccess(result)
                     if (result != null) {
