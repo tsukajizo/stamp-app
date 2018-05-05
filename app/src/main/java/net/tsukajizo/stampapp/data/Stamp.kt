@@ -36,4 +36,5 @@ data class Stamp constructor(
         images.recycle()
         return drawable
     }
+
 }
