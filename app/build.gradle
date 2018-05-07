@@ -47,8 +47,8 @@ dependencies {
 
     //moshi
     def moshiVerion = '1.5.0'
-    compile "com.squareup.moshi:moshi:$moshiVerion"
-    compile "com.squareup.moshi:moshi-kotlin:$moshiVerion"
+    implementation "com.squareup.moshi:moshi:$moshiVerion"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshiVerion"
 
     // Room
     implementation "android.arch.persistence.room:runtime:1.0.0"
