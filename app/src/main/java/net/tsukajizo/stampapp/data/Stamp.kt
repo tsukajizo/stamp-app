@@ -4,7 +4,6 @@ import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import android.content.Context
-import android.graphics.drawable.Drawable
 import net.tsukajizo.stampapp.R
 
 @Entity
@@ -33,11 +32,8 @@ data class Stamp constructor(
         }
     }
 
-    fun getStampDrawable(context: Context): Drawable {
-        val images = context.resources.obtainTypedArray(R.array.stamp_blue)
-        val drawable = images.getDrawable(id)
-        images.recycle()
-        return drawable
+    fun getStampPath(context: Context): String {
+        return String.format(context.getString(R.string.stamp_path_format), id)
     }
 
 }

@@ -6,7 +6,8 @@
     <ImageView
         android:id="@+id/iv_stamp"
         android:contentDescription="@string/image_name_stamp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/stamp_list_item_stamp_size"
+        android:layout_height="@dimen/stamp_list_item_stamp_size"
+        android:scaleType="fitXY"
         android:src="@drawable/no_stamp" />
 </android.support.constraint.ConstraintLayout>

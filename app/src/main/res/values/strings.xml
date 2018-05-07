@@ -10,4 +10,5 @@
     <string name="qr_camera_fragment_button_qr_get_label">QRコードでスタンプをGET</string>
     <string name="title">スタンプラリー</string>
     <string name="stamp_rally_description">色々な場所にあるQRコードを探してスタンプを集めよう！！スタンプが集まったら、すてきなご褒美がもらえるよ！</string>
+    <string name="stamp_path_format">file:///android_asset/image/blue_stamp_%s.png</string>
 </resources>
