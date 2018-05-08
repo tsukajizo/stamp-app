@@ -3,6 +3,7 @@ package net.tsukajizo.stampapp.di
 import dagger.Component
 import net.tsukajizo.stampapp.App
 import net.tsukajizo.stampapp.presentation.location.StampLocationFragment
+import net.tsukajizo.stampapp.presentation.title.TitleStampRallyFragment
 import net.tsukajizo.stampapp.presentation.viewer.StampViewerFragment
 import javax.inject.Singleton
 
@@ -14,4 +15,5 @@ interface AppComponent {
     fun inject(app: App)
     fun inject(stampViewerFragment: StampViewerFragment)
     fun inject(stampLocationFragment: StampLocationFragment)
+    fun inject(titleStampRallyFragment: TitleStampRallyFragment)
 }

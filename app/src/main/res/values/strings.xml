@@ -11,4 +11,7 @@
     <string name="title">スタンプラリー</string>
     <string name="stamp_rally_description">色々な場所にあるQRコードを探してスタンプを集めよう！！スタンプが集まったら、すてきなご褒美がもらえるよ！</string>
     <string name="stamp_path_format">file:///android_asset/image/blue_stamp_%s.png</string>
+    <string name="congratulations_title">おめでとうございます。</string>
+    <string name="congratulation_desc">すべてのスタンプ集め終わりました。おめでとうございます。お疲れ様でした！</string>
+    <string name="btn_recive_prize">景品を受け取る</string>
 </resources>

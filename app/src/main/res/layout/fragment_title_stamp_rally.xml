@@ -4,11 +4,11 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/ll_normal_title_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -22,5 +22,33 @@
             android:layout_marginTop="@dimen/title_stamp_rally_description_top_margin"
             android:text="@string/stamp_rally_description"
             android:textSize="@dimen/text_size_subtitle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_collection_complete_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/congratulations_title"
+            android:textSize="@dimen/text_size_title" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/title_stamp_rally_description_top_margin"
+            android:text="@string/congratulation_desc"
+            android:textSize="@dimen/text_size_subtitle" />
+
+        <Button
+            android:id="@+id/btn_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_recive_prize" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

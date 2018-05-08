@@ -64,12 +64,11 @@ class StampViewerFragment : Fragment() {
         }
     }
 
-    val listUpdateListener = object : TaskListener<List<Stamp>?> {
-        override fun onSuccess(result: List<Stamp>?) {
+    val listUpdateListener = object : TaskListener<List<Stamp>> {
+        override fun onSuccess(result: List<Stamp>) {
             super.onSuccess(result)
-            if (result != null) {
-                updateStamp(result)
-            }
+            updateStamp(result)
+
         }
     }
 
