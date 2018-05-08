@@ -53,28 +53,23 @@ class StampViewerFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        readStampTask.setListener(object : TaskListener<List<Stamp>?> {
-            override fun onSuccess(result: List<Stamp>?) {
-                super.onSuccess(result)
-                if (result != null) {
-                    updateStamp(result)
-                }
-            }
-        })
+        readStampTask.setListener(listUpdateListener)
         readStampTask.execute()
 
         val stampId = arguments.getInt(Constant.BUNDLE_KEY_STAMP_ID, Constant.UNDEFINED_STAMP_ID)
         if (stampId != Constant.UNDEFINED_STAMP_ID) {
-            updateGetStampTask.setListener(object : TaskListener<List<Stamp>?> {
-                override fun onSuccess(result: List<Stamp>?) {
-                    super.onSuccess(result)
-                    if (result != null) {
-                        updateStamp(result)
-                    }
-                }
-            })
+            updateGetStampTask.setListener(listUpdateListener)
             updateGetStampTask.execute(stampId)
             Toast.makeText(activity, "新しいスタンプをGET!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    val listUpdateListener = object : TaskListener<List<Stamp>?> {
+        override fun onSuccess(result: List<Stamp>?) {
+            super.onSuccess(result)
+            if (result != null) {
+                updateStamp(result)
+            }
         }
     }
 
@@ -86,4 +81,5 @@ class StampViewerFragment : Fragment() {
         })
         rvStampList?.adapter = adapter
     }
+
 }
