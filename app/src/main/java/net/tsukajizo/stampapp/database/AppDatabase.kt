@@ -5,7 +5,7 @@ import android.arch.persistence.room.RoomDatabase
 import net.tsukajizo.stampapp.data.Stamp
 import net.tsukajizo.stampapp.data.StampDao
 
-@Database(entities = [(Stamp::class)], version = 1)
+@Database(entities = [(Stamp::class)], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun stampDao(): StampDao
 }
