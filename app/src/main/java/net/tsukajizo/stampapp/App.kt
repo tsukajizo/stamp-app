@@ -1,14 +1,21 @@
 package net.tsukajizo.stampapp
 
+import android.app.Activity
 import android.app.Application
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
 import net.tsukajizo.stampapp.di.AppComponent
-import net.tsukajizo.stampapp.di.AppModule
 import net.tsukajizo.stampapp.di.DaggerAppComponent
 import net.tsukajizo.stampapp.task.InitializeStampTask
 import javax.inject.Inject
 
 
-class App : Application() {
+class App : Application(), HasActivityInjector {
+
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+
 
     @Inject
     lateinit var initializeStampTask: InitializeStampTask
@@ -27,9 +34,9 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         app = this
-        appComponent = DaggerAppComponent.builder()
-                .appModule(AppModule(this)).build()
-        App.app()!!.appComponent()!!.inject(this)
+        DaggerAppComponent.builder()
+                .create(this)
+                .inject(this)
         initializeStampData()
     }
 
@@ -42,4 +49,7 @@ class App : Application() {
         initializeStampTask.execute()
     }
 
+    override fun activityInjector(): AndroidInjector<Activity> {
+        return dispatchingAndroidInjector
+    }
 }

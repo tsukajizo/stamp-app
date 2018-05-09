@@ -2,15 +2,14 @@ package net.tsukajizo.stampapp.presentation.viewer
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_stamp_vewier.view.*
-import net.tsukajizo.stampapp.App
 import net.tsukajizo.stampapp.R
 import net.tsukajizo.stampapp.data.Stamp
 import net.tsukajizo.stampapp.task.ReadStampTask
@@ -20,7 +19,7 @@ import net.tsukajizo.stampapp.util.Constant
 import javax.inject.Inject
 
 
-class StampViewerFragment : Fragment() {
+class StampViewerFragment : DaggerFragment() {
     private var rvStampList: RecyclerView? = null
 
     @Inject
@@ -36,11 +35,6 @@ class StampViewerFragment : Fragment() {
             fragment.arguments = bundle
             return fragment
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        App.app()!!.appComponent()!!.inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

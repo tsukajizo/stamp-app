@@ -1,7 +1,6 @@
 package net.tsukajizo.stampapp.presentation.location
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import net.tsukajizo.stampapp.App
+import dagger.android.support.DaggerFragment
 import net.tsukajizo.stampapp.R
 import net.tsukajizo.stampapp.data.Stamp
 import net.tsukajizo.stampapp.task.ReadStampTask
@@ -19,7 +18,7 @@ import net.tsukajizo.stampapp.task.TaskListener
 import javax.inject.Inject
 
 
-class StampLocationFragment : Fragment(), OnMapReadyCallback {
+class StampLocationFragment : DaggerFragment(), OnMapReadyCallback {
 
     @Inject
     lateinit var readStampTask: ReadStampTask
@@ -34,10 +33,6 @@ class StampLocationFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        App.app()!!.appComponent()!!.inject(this)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_stamp_location, container, false)

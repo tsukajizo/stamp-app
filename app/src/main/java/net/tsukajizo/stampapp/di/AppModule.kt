@@ -1,26 +1,22 @@
 package net.tsukajizo.stampapp.di
 
-import android.app.Application
 import android.arch.persistence.room.Room
-import android.content.Context
 import dagger.Module
 import dagger.Provides
+import net.tsukajizo.stampapp.App
 import net.tsukajizo.stampapp.R
 import net.tsukajizo.stampapp.database.AppDatabase
 import javax.inject.Singleton
 
 
 @Module
-class AppModule(private val application: Application) {
+class AppModule() {
 
-    @Provides
-    fun provideContext(): Context {
-        return application
-    }
 
     @Singleton
     @Provides
-    fun provideAppDatabase(context: Context): AppDatabase {
+    fun provideAppDatabase(app: App): AppDatabase {
+        val context = app.applicationContext
         return Room.databaseBuilder(context, AppDatabase::class.java, context.resources.getString(R.string.db_name)).build()
     }
 }
