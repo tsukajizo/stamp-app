@@ -2,7 +2,7 @@ package net.tsukajizo.stampapp.task
 
 import android.os.AsyncTask
 import net.tsukajizo.stampapp.data.Stamp
-import net.tsukajizo.stampapp.database.AppDatabase
+import net.tsukajizo.stampapp.data.database.AppDatabase
 import javax.inject.Inject
 
 class UpdateGetStampTask @Inject constructor(private val db: AppDatabase) : AsyncTask<Int, Unit, List<Stamp>>() {

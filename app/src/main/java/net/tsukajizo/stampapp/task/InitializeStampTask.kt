@@ -7,7 +7,7 @@ import com.squareup.moshi.Types
 import kotlinx.coroutines.experimental.async
 import net.tsukajizo.stampapp.App
 import net.tsukajizo.stampapp.data.Stamp
-import net.tsukajizo.stampapp.database.AppDatabase
+import net.tsukajizo.stampapp.data.database.AppDatabase
 import javax.inject.Inject
 
 

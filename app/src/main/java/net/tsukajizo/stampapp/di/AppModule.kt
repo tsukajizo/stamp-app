@@ -5,7 +5,7 @@ import dagger.Module
 import dagger.Provides
 import net.tsukajizo.stampapp.App
 import net.tsukajizo.stampapp.R
-import net.tsukajizo.stampapp.database.AppDatabase
+import net.tsukajizo.stampapp.data.database.AppDatabase
 import javax.inject.Singleton
 
 

@@ -1,9 +1,10 @@
-package net.tsukajizo.stampapp.data
+package net.tsukajizo.stampapp.data.database
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
 import android.arch.persistence.room.Update
+import net.tsukajizo.stampapp.data.Stamp
 
 
 @Dao
