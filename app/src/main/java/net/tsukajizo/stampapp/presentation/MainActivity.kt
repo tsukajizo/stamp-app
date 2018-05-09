@@ -3,11 +3,7 @@ package net.tsukajizo.stampapp.presentation
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import net.tsukajizo.stampapp.R
 import net.tsukajizo.stampapp.presentation.collect.StampGetActivity
@@ -15,24 +11,15 @@ import net.tsukajizo.stampapp.presentation.location.StampLocationFragment
 import net.tsukajizo.stampapp.presentation.title.TitleStampRallyFragment
 import net.tsukajizo.stampapp.presentation.viewer.StampViewerFragment
 import net.tsukajizo.stampapp.util.Constant
-import javax.inject.Inject
 
 
-class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
-
-    @Inject
-    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
-
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
-        return fragmentInjector
-    }
+class MainActivity : DaggerAppCompatActivity() {
 
     companion object {
         const val REQ_GET_STAMP = 0
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
