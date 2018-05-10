@@ -1,6 +1,7 @@
 package net.tsukajizo.stampapp.presentation.viewer
 
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -8,7 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.dialog_view_stamp_detail.view.*
 import kotlinx.android.synthetic.main.fragment_stamp_vewier.view.*
 import net.tsukajizo.stampapp.R
 import net.tsukajizo.stampapp.data.Stamp
@@ -67,9 +70,17 @@ class StampViewerFragment : DaggerFragment() {
     }
 
     private fun updateStamp(stampList: List<Stamp>) {
+
         val adapter = StampListAdapter(activity, stampList, object : StampListAdapter.OnItemClickListener {
             override fun onClick(item: Stamp) {
-                Toast.makeText(activity, "label:${item.label} , desc:${item.desc}", Toast.LENGTH_LONG).show()
+                val dialogView = layoutInflater.inflate(R.layout.dialog_view_stamp_detail, null)
+                dialogView.tv_title.text = item.label
+                dialogView.tv_desc.text = item.desc
+                Glide.with(activity).load(item.getStampPath(activity)).into(dialogView.iv_stamp_image)
+                AlertDialog.Builder(activity).apply {
+                    setView(dialogView)
+                    setNegativeButton("OK", null)
+                }.create().show()
             }
         })
         rvStampList?.adapter = adapter

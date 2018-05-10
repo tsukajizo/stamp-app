@@ -23,6 +23,7 @@ class InitializeStampTask @Inject constructor(private val app: App,
                     null
                 }
                 stampList?.forEach { stamp ->
+                    stamp.getStamp()
                     db.stampDao().insertStamp(stamp)
                 }
             }

@@ -14,5 +14,6 @@
     <string name="congratulations_title">おめでとうございます。</string>
     <string name="congratulation_desc">すべてのスタンプ集め終わりました。おめでとうございます。お疲れ様でした！</string>
     <string name="btn_recive_prize">景品を受け取る</string>
+    <string name="iv_description_stamp_image">スタンプ画像</string>
 
 </resources>
