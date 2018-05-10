@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">StampApp</string>
     <string name="db_name">stamp_app.db</string>
-
+    <string name="filename_stamp_list_json">stamp_list.json</string>
 
     <string name="image_name_stamp">Image for stamp</string>
     <string name="bottom_menu_stamp">Stamp</string>
@@ -14,4 +14,5 @@
     <string name="congratulations_title">おめでとうございます。</string>
     <string name="congratulation_desc">すべてのスタンプ集め終わりました。おめでとうございます。お疲れ様でした！</string>
     <string name="btn_recive_prize">景品を受け取る</string>
+
 </resources>

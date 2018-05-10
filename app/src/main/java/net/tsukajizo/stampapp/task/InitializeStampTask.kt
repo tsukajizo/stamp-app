@@ -1,28 +1,27 @@
 package net.tsukajizo.stampapp.task
 
 import android.os.AsyncTask
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
 import kotlinx.coroutines.experimental.async
 import net.tsukajizo.stampapp.App
-import net.tsukajizo.stampapp.data.Stamp
+import net.tsukajizo.stampapp.R
+import net.tsukajizo.stampapp.data.asset.StampJsonParser
 import net.tsukajizo.stampapp.data.database.AppDatabase
 import javax.inject.Inject
 
 
-class InitializeStampTask @Inject constructor(private val db: AppDatabase) : AsyncTask<Unit, Unit, Unit>() {
+class InitializeStampTask @Inject constructor(private val app: App,
+                                              private val db: AppDatabase,
+                                              private val stampParser: StampJsonParser) : AsyncTask<Unit, Unit, Unit>() {
 
     override fun doInBackground(vararg parmas: Unit) {
         async {
             if (db.stampDao().count() == 0) {
-                // JSON データを assets から取得
-                val json = App.app()?.resources?.assets?.open("stamp_list.json")?.reader(charset = Charsets.UTF_8).use { it?.readText() }
-                        ?: throw Exception("asset not found")
-                val type = Types.newParameterizedType(List::class.java, Stamp::class.java)
-                val moshi = Moshi.Builder().build()!!
-                val adapter: JsonAdapter<List<Stamp>> = moshi.adapter(type)
-                val stampList = adapter.fromJson(json)
+                val jsonPath = app.resources.getString(R.string.filename_stamp_list_json)
+                val stampList = try {
+                    stampParser.fromFile(jsonPath)
+                } catch (e: Throwable) {
+                    null
+                }
                 stampList?.forEach { stamp ->
                     db.stampDao().insertStamp(stamp)
                 }
