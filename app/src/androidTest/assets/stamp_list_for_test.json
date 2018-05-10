@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "label": "test1",
+    "desc": "hogehoge",
+    "latitude": 11.111111,
+    "longitude": 11.111111
+  },
+  {
+    "id": 2,
+    "label": "test2",
+    "desc": "fugafuga",
+    "latitude": 22.2222222,
+    "longitude": 22.2222222
+  }
+]

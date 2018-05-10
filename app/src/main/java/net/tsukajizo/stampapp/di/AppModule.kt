@@ -24,6 +24,6 @@ class AppModule() {
     @Singleton
     @Provides
     fun provideStampJsonParser(app: App): StampJsonParser {
-        return StampJsonParser(app)
+        return StampJsonParser(app.applicationContext)
     }
 }

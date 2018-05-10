@@ -29,10 +29,18 @@ android {
         def API_KEY = properties.getProperty("api_key")
         resValue "string" , "google_map_api_key" , "${API_KEY}"
     }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    configurations.all {
+        resolutionStrategy.force 'com.android.support:support-annotations:26.1.0'
+    }
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-reflect:1.2.41"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.22.5"
@@ -43,6 +51,7 @@ dependencies {
     implementation 'com.journeyapps:zxing-android-embedded:3.5.0'
 
     testImplementation 'junit:junit:4.12'
+
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 

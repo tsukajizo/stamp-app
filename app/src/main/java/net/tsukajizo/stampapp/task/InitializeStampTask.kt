@@ -18,7 +18,7 @@ class InitializeStampTask @Inject constructor(private val app: App,
             if (db.stampDao().count() == 0) {
                 val jsonPath = app.resources.getString(R.string.filename_stamp_list_json)
                 val stampList = try {
-                    stampParser.fromFile(jsonPath)
+                    stampParser.fromAssetFile(jsonPath)
                 } catch (e: Throwable) {
                     null
                 }

@@ -24,7 +24,6 @@ class App : DaggerApplication() {
         fun app(): App? {
             return app
         }
-
     }
 
     private var appComponent: AppComponent? = null
