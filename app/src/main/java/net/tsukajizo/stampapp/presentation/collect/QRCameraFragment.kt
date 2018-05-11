@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.google.zxing.ResultPoint
 import com.journeyapps.barcodescanner.BarcodeCallback
 import com.journeyapps.barcodescanner.BarcodeResult
@@ -64,7 +63,6 @@ class QRCameraFragment : Fragment() {
         barcodeView?.decodeSingle(object : BarcodeCallback {
             override fun barcodeResult(barcodeResult: BarcodeResult) {
                 parseCode(barcodeResult.text)
-                Toast.makeText(activity, barcodeResult.text, Toast.LENGTH_LONG).show()
             }
 
             override fun possibleResultPoints(list: List<ResultPoint>) {}
@@ -78,10 +76,8 @@ class QRCameraFragment : Fragment() {
             AppScheme.UNKNOWN_STAMP_ID
         }
         if (id == AppScheme.UNKNOWN_STAMP_ID) {
-            Toast.makeText(activity, "Code not found!", Toast.LENGTH_LONG).show()
             barcodeView?.resume()
         } else {
-            Toast.makeText(activity, "Code found!", Toast.LENGTH_LONG).show()
             val data = Intent()
             val bundle = Bundle()
             bundle.putInt(Constant.BUNDLE_KEY_STAMP_ID, id)
