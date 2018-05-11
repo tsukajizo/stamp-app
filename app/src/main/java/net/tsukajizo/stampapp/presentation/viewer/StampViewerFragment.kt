@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.dialog_view_stamp_detail.view.*
@@ -55,9 +54,17 @@ class StampViewerFragment : DaggerFragment() {
 
         val stampId = arguments.getInt(Constant.BUNDLE_KEY_STAMP_ID, Constant.UNDEFINED_STAMP_ID)
         if (stampId != Constant.UNDEFINED_STAMP_ID) {
-            updateGetStampTask.setListener(listUpdateListener)
+            updateGetStampTask.setListener(object : TaskListener<List<Stamp>> {
+                override fun onSuccess(result: List<Stamp>) {
+                    super.onSuccess(result)
+                    val item = result.find { stamp -> stamp.id == stampId }
+                    if (item != null) {
+                        showStampDialog(item, getString(R.string.dialog_title_new_stamp_get))
+                    }
+                    updateStamp(result)
+                }
+            })
             updateGetStampTask.execute(stampId)
-            Toast.makeText(activity, "新しいスタンプをGET!", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -65,25 +72,28 @@ class StampViewerFragment : DaggerFragment() {
         override fun onSuccess(result: List<Stamp>) {
             super.onSuccess(result)
             updateStamp(result)
-
         }
     }
 
     private fun updateStamp(stampList: List<Stamp>) {
-
         val adapter = StampListAdapter(activity, stampList, object : StampListAdapter.OnItemClickListener {
             override fun onClick(item: Stamp) {
-                val dialogView = layoutInflater.inflate(R.layout.dialog_view_stamp_detail, null)
-                dialogView.tv_title.text = item.label
-                dialogView.tv_desc.text = item.desc
-                Glide.with(activity).load(item.getStampPath(activity)).into(dialogView.iv_stamp_image)
-                AlertDialog.Builder(activity).apply {
-                    setView(dialogView)
-                    setNegativeButton("OK", null)
-                }.create().show()
+                showStampDialog(item)
             }
         })
         rvStampList?.adapter = adapter
+    }
+
+    private fun showStampDialog(item: Stamp, title: String = "") {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_view_stamp_detail, null)
+        dialogView.tv_title.text = item.label
+        dialogView.tv_desc.text = item.desc
+        Glide.with(activity).load(item.getStampPath(activity)).into(dialogView.iv_stamp_image)
+        AlertDialog.Builder(activity).apply {
+            setTitle(title)
+            setView(dialogView)
+            setNegativeButton("OK", null)
+        }.create().show()
     }
 
 }
