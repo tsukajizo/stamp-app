@@ -30,6 +30,9 @@ class StampViewerFragment : DaggerFragment() {
     @Inject
     lateinit var updateGetStampTask: UpdateGetStampTask
 
+    @Inject
+    lateinit var adapter: StampListAdapter
+
     companion object {
         fun newInstance(): StampViewerFragment {
             val fragment = StampViewerFragment()
@@ -76,11 +79,12 @@ class StampViewerFragment : DaggerFragment() {
     }
 
     private fun updateStamp(stampList: List<Stamp>) {
-        val adapter = StampListAdapter(activity, stampList, object : StampListAdapter.OnItemClickListener {
+        adapter.list = stampList
+        adapter.itemClickListener = object : StampListAdapter.OnItemClickListener {
             override fun onClick(item: Stamp) {
                 showStampDialog(item)
             }
-        })
+        }
         rvStampList?.adapter = adapter
     }
 
