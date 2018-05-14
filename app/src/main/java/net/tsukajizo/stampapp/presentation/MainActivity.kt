@@ -2,18 +2,17 @@ package net.tsukajizo.stampapp.presentation
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import net.tsukajizo.stampapp.R
-import net.tsukajizo.stampapp.presentation.collect.StampGetActivity
-import net.tsukajizo.stampapp.presentation.location.StampLocationFragment
-import net.tsukajizo.stampapp.presentation.title.TitleStampRallyFragment
-import net.tsukajizo.stampapp.presentation.viewer.StampViewerFragment
 import net.tsukajizo.stampapp.util.Constant
+import javax.inject.Inject
 
 
 class MainActivity : DaggerAppCompatActivity() {
+
+    @Inject
+    lateinit var navigator: Navigator
 
     companion object {
         const val REQ_GET_STAMP = 0
@@ -26,13 +25,13 @@ class MainActivity : DaggerAppCompatActivity() {
         bottom_navigation.setOnNavigationItemSelectedListener({
             when (it.itemId) {
                 R.id.nav_camera -> {
-                    setFragment(TitleStampRallyFragment.newInstance())
+                    navigator.navigateToTitleStampRally()
                 }
                 R.id.nav_stamp -> {
-                    setFragment(StampViewerFragment.newInstance())
+                    navigator.navigateToStampList()
                 }
                 R.id.nav_map -> {
-                    setFragment(StampLocationFragment.newInstance())
+                    navigator.navigateToStampLocation()
                 }
                 else -> {
                 }
@@ -40,9 +39,9 @@ class MainActivity : DaggerAppCompatActivity() {
             true
         })
         fab_get_stamp.setOnClickListener({
-            startGetStampActivity()
+            navigator.navigateToGetStampActivity(REQ_GET_STAMP)
         })
-        setFragment(TitleStampRallyFragment.newInstance())
+        navigator.navigateToTitleStampRally()
     }
 
 
@@ -50,26 +49,11 @@ class MainActivity : DaggerAppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             REQ_GET_STAMP -> {
-                val fragment = StampViewerFragment.newInstance()
-                if (data != null) {
-                    val stampId = data.getIntExtra(Constant.BUNDLE_KEY_STAMP_ID, Constant.UNDEFINED_STAMP_ID)
-                    val bundle = Bundle()
-                    bundle.putInt(Constant.BUNDLE_KEY_STAMP_ID, stampId)
-                    fragment.arguments = bundle
-                }
-                setFragment(fragment)
+                val stampId = data?.getIntExtra(Constant.BUNDLE_KEY_STAMP_ID, Constant.UNDEFINED_STAMP_ID)
+                        ?: Constant.UNDEFINED_STAMP_ID
+                navigator.navigateToStampList(stampId)
             }
         }
     }
 
-    private fun startGetStampActivity() {
-        val intent = Intent(this, StampGetActivity::class.java)
-        startActivityForResult(intent, REQ_GET_STAMP)
-    }
-
-    private fun setFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fl_fragment_container, fragment)
-        transaction.commit()
-    }
 }
