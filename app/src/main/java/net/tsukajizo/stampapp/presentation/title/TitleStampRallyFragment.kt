@@ -1,10 +1,10 @@
 package net.tsukajizo.stampapp.presentation.title
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_title_stamp_rally.view.*
 import net.tsukajizo.stampapp.R
@@ -31,7 +31,11 @@ class TitleStampRallyFragment : DaggerFragment() {
         val view = inflater.inflate(R.layout.fragment_title_stamp_rally, container, false)
 
         view.btn_complete.setOnClickListener({
-            Toast.makeText(activity, "おめでとうございます!", Toast.LENGTH_SHORT).show()
+            AlertDialog.Builder(activity).apply {
+                setTitle("コンプリート！")
+                setMessage("おめでとうございます！")
+                setNegativeButton("OK", null)
+            }.create().show()
         })
 
         readStampTask.setListener(object : TaskListener<List<Stamp>> {
