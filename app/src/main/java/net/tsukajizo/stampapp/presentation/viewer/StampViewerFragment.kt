@@ -80,11 +80,7 @@ class StampViewerFragment : DaggerFragment() {
 
     private fun updateStamp(stampList: List<Stamp>) {
         adapter.list = stampList
-        adapter.itemClickListener = object : StampListAdapter.OnItemClickListener {
-            override fun onClick(item: Stamp) {
-                showStampDialog(item)
-            }
-        }
+        adapter.itemClickListener = { stamp -> showStampDialog(stamp) }
         rvStampList?.adapter = adapter
     }
 

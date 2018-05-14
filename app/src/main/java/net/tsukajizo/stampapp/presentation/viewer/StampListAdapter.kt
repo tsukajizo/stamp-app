@@ -12,19 +12,22 @@ import net.tsukajizo.stampapp.App
 import net.tsukajizo.stampapp.R
 import net.tsukajizo.stampapp.data.Stamp
 import javax.inject.Inject
+import kotlin.properties.Delegates
 
 
 public class StampListAdapter @Inject constructor(private val app: App) : RecyclerView.Adapter<StampListAdapter.ViewHolder>() {
 
-    var list: List<Stamp>? = null
-    var itemClickListener: OnItemClickListener? = null
+    var list: List<Stamp> by Delegates.observable(emptyList()) { _, _, _ ->
+        notifyDataSetChanged()
+    }
+    var itemClickListener: (stamp: Stamp) -> Unit = { _ -> }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder =
             ViewHolder(LayoutInflater.from(app.applicationContext).inflate(R.layout.stamp_list_item, parent, false))
 
 
     override fun getItemCount(): Int {
-        return list?.size ?: 0
+        return list.size
     }
 
     override fun onViewRecycled(viewHolder: ViewHolder) =
@@ -32,19 +35,19 @@ public class StampListAdapter @Inject constructor(private val app: App) : Recycl
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
-            holder.bind(app.applicationContext, list!![position], itemClickListener!!)
+            holder.bind(app.applicationContext, list[position], itemClickListener)
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val view = itemView
         val imageView = itemView.iv_stamp!!
 
-        fun bind(context: Context, stamp: Stamp, itemClickListener: OnItemClickListener) {
+        fun bind(context: Context, stamp: Stamp, clickListener: (Stamp) -> Unit) {
             if (stamp.isGathered) {
                 val path = stamp.getStampPath(context)
                 Glide.with(context).load(Uri.parse(path))
                         .into(imageView)
-                view.setOnClickListener({ itemClickListener?.onClick(stamp) })
+                view.setOnClickListener({ clickListener(stamp) })
             }
         }
 
@@ -53,7 +56,4 @@ public class StampListAdapter @Inject constructor(private val app: App) : Recycl
         }
     }
 
-    interface OnItemClickListener {
-        fun onClick(item: Stamp)
-    }
 }
