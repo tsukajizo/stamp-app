@@ -15,7 +15,7 @@ import javax.inject.Inject
 import kotlin.properties.Delegates
 
 
-public class StampListAdapter @Inject constructor(private val app: App) : RecyclerView.Adapter<StampListAdapter.ViewHolder>() {
+class StampListAdapter @Inject constructor(private val app: App) : RecyclerView.Adapter<StampListAdapter.ViewHolder>() {
 
     var list: List<Stamp> by Delegates.observable(emptyList()) { _, _, _ ->
         notifyDataSetChanged()
@@ -39,8 +39,8 @@ public class StampListAdapter @Inject constructor(private val app: App) : Recycl
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val view = itemView
-        val imageView = itemView.iv_stamp!!
+        private val view = itemView
+        private val imageView = itemView.iv_stamp!!
 
         fun bind(context: Context, stamp: Stamp, clickListener: (Stamp) -> Unit) {
             if (stamp.isGathered) {
