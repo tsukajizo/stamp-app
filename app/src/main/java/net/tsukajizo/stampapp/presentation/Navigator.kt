@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import net.tsukajizo.stampapp.R
+import net.tsukajizo.stampapp.presentation.collect.QRCameraFragment
 import net.tsukajizo.stampapp.presentation.collect.StampGetActivity
 import net.tsukajizo.stampapp.presentation.location.StampLocationFragment
 import net.tsukajizo.stampapp.presentation.title.TitleStampRallyFragment
@@ -46,5 +47,9 @@ class Navigator @Inject constructor(private val activity: AppCompatActivity) {
     fun navigateToGetStampActivity(requestId: Int) {
         val intent = Intent(activity, StampGetActivity::class.java)
         activity.startActivityForResult(intent, requestId)
+    }
+
+    fun navigateToQRCameraFragment() {
+        replaceFragment(QRCameraFragment.newInstance())
     }
 }

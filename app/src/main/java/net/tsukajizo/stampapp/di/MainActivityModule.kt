@@ -13,7 +13,7 @@ import net.tsukajizo.stampapp.presentation.viewer.StampViewerFragment
 abstract class MainActivityModule {
 
     @Binds
-    abstract fun providesAppCompatActivity(mainActivity: MainActivity): AppCompatActivity
+    abstract fun providesAppCompatActivity(activity: MainActivity): AppCompatActivity
 
     @ContributesAndroidInjector
     abstract fun contributeStampViewerFragment(): StampViewerFragment
