@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.fragment_stamp_vewier.view.*
 import net.tsukajizo.stampapp.R
 import net.tsukajizo.stampapp.data.Stamp
 import net.tsukajizo.stampapp.task.ReadStampTask
-import net.tsukajizo.stampapp.task.TaskListener
 import net.tsukajizo.stampapp.task.UpdateGetStampTask
 import net.tsukajizo.stampapp.util.Constant
 import javax.inject.Inject
@@ -52,31 +51,26 @@ class StampViewerFragment : DaggerFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        readStampTask.setListener(listUpdateListener)
-        readStampTask.execute()
+        readStampTask.execute({
+            updateStamp(it)
+        }, {
+            //TODO エラー処理を書く
+        }, Unit)
 
         val stampId = arguments.getInt(Constant.BUNDLE_KEY_STAMP_ID, Constant.UNDEFINED_STAMP_ID)
         if (stampId != Constant.UNDEFINED_STAMP_ID) {
-            updateGetStampTask.setListener(object : TaskListener<List<Stamp>> {
-                override fun onSuccess(result: List<Stamp>) {
-                    super.onSuccess(result)
-                    val item = result.find { stamp -> stamp.id == stampId }
-                    if (item != null) {
-                        showStampDialog(item, getString(R.string.dialog_title_new_stamp_get))
-                    }
-                    updateStamp(result)
+            updateGetStampTask.execute({
+                val item = it.find { stamp -> stamp.id == stampId }
+                if (item != null) {
+                    showStampDialog(item, getString(R.string.dialog_title_new_stamp_get))
                 }
-            })
-            updateGetStampTask.execute(stampId)
+                updateStamp(it)
+            }, {
+                //TODO エラー処理を書く
+            }, stampId)
         }
     }
 
-    val listUpdateListener = object : TaskListener<List<Stamp>> {
-        override fun onSuccess(result: List<Stamp>) {
-            super.onSuccess(result)
-            updateStamp(result)
-        }
-    }
 
     private fun updateStamp(stampList: List<Stamp>) {
         adapter.list = stampList

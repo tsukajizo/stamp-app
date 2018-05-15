@@ -31,7 +31,6 @@ class App : DaggerApplication() {
     override fun onCreate() {
         super.onCreate()
         app = this
-
         initializeStampData()
     }
 
@@ -41,7 +40,7 @@ class App : DaggerApplication() {
 
 
     private fun initializeStampData() {
-        initializeStampTask.execute()
+        initializeStampTask.execute({}, {}, Unit)
     }
 
 }

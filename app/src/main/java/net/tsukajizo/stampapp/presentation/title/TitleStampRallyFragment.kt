@@ -5,12 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_title_stamp_rally.view.*
 import net.tsukajizo.stampapp.R
-import net.tsukajizo.stampapp.data.Stamp
 import net.tsukajizo.stampapp.task.ReadStampTask
-import net.tsukajizo.stampapp.task.TaskListener
 import javax.inject.Inject
 
 class TitleStampRallyFragment : DaggerFragment() {
@@ -38,20 +37,20 @@ class TitleStampRallyFragment : DaggerFragment() {
             }.create().show()
         })
 
-        readStampTask.setListener(object : TaskListener<List<Stamp>> {
-            override fun onSuccess(result: List<Stamp>) {
-                val isComplete = result.none({ stamp -> !stamp.isGathered })
-                if (isComplete) {
-                    view.ll_normal_title_view.visibility = View.GONE
-                    view.ll_collection_complete_view.visibility = View.VISIBLE
-                } else {
-                    view.ll_normal_title_view.visibility = View.VISIBLE
-                    view.ll_collection_complete_view.visibility = View.GONE
-                }
-                super.onSuccess(result)
+
+        readStampTask.execute({
+            val isComplete = it.none({ stamp -> !stamp.isGathered })
+            if (isComplete) {
+                view.ll_normal_title_view.visibility = View.GONE
+                view.ll_collection_complete_view.visibility = View.VISIBLE
+            } else {
+                view.ll_normal_title_view.visibility = View.VISIBLE
+                view.ll_collection_complete_view.visibility = View.GONE
             }
-        })
-        readStampTask.execute()
+        }, {
+            Toast.makeText(activity, "エラー:${it.message}", Toast.LENGTH_SHORT).show()
+            // TODO エラー処理を書く
+        }, Unit)
         return view
     }
 }

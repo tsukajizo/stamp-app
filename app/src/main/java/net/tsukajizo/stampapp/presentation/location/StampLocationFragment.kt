@@ -14,7 +14,6 @@ import dagger.android.support.DaggerFragment
 import net.tsukajizo.stampapp.R
 import net.tsukajizo.stampapp.data.Stamp
 import net.tsukajizo.stampapp.task.ReadStampTask
-import net.tsukajizo.stampapp.task.TaskListener
 import javax.inject.Inject
 
 
@@ -48,13 +47,11 @@ class StampLocationFragment : DaggerFragment(), OnMapReadyCallback {
     override fun onMapReady(map: GoogleMap?) {
         // カメラを移動
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(SHIBUYA, 13f))
-        readStampTask.setListener(object : TaskListener<List<Stamp>> {
-            override fun onSuccess(result: List<Stamp>) {
-                super.onSuccess(result)
-                result.forEach { stamp -> addMarker(map, stamp) }
-            }
-        })
-        readStampTask.execute()
+        readStampTask.execute({
+            it.forEach { stamp -> addMarker(map, stamp) }
+        }, {
+            //TODO エラー処理を書く
+        }, Unit)
 
 
     }
