@@ -1,5 +1,6 @@
 package net.tsukajizo.stampapp.presentation
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import dagger.android.support.DaggerAppCompatActivity
@@ -49,9 +50,11 @@ class MainActivity : DaggerAppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             REQ_GET_STAMP -> {
-                val stampId = data?.getIntExtra(Constant.BUNDLE_KEY_STAMP_ID, Constant.UNDEFINED_STAMP_ID)
-                        ?: Constant.UNDEFINED_STAMP_ID
-                navigator.navigateToStampList(stampId)
+                if (resultCode == Activity.RESULT_OK) {
+                    val stampId = data?.getIntExtra(Constant.BUNDLE_KEY_STAMP_ID, Constant.UNDEFINED_STAMP_ID)
+                            ?: Constant.UNDEFINED_STAMP_ID
+                    navigator.navigateToStampList(stampId)
+                }
             }
         }
     }

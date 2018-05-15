@@ -75,6 +75,7 @@ class QRCameraFragment : Fragment() {
         } catch (e: ParseCodeException) {
             AppScheme.UNKNOWN_STAMP_ID
         }
+        // TODO idが存在しているかを確認する
         if (id == AppScheme.UNKNOWN_STAMP_ID) {
             barcodeView?.resume()
         } else {
