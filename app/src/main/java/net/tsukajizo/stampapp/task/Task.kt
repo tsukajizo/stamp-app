@@ -5,17 +5,20 @@ import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 
-abstract class Task<in Param, out Result> {
-    abstract fun run(param: Param): Result
+abstract class Task<in Param, out R, out F> {
+    abstract fun run(param: Param): Result<R, F>
 
-    fun execute(onResult: (Result) -> Unit, onFailure: (Throwable) -> Unit,
-                params: Param) {
+    fun execute(onResult: (R) -> Unit, onFailure: (F) -> Unit, params: Param) {
+        val job = async(CommonPool) { run(params) }
         launch(UI) {
-            try {
-                onResult.invoke(async(CommonPool) { run(params) }.await())
-            } catch (e: Throwable) {
-                onFailure.invoke(e)
+            val result = job.await()
+            when (result) {
+                is Result.Success -> onResult.invoke(result.result)
+                is Result.Failure -> onFailure.invoke(result.failure)
             }
+
         }
     }
+
+    open fun isSuccess(): Boolean = true
 }

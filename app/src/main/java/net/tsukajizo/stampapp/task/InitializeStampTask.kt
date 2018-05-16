@@ -10,9 +10,9 @@ import javax.inject.Inject
 
 class InitializeStampTask @Inject constructor(private val app: App,
                                               private val db: AppDatabase,
-                                              private val stampParser: StampJsonParser) : Task<Unit, Unit>() {
+                                              private val stampParser: StampJsonParser) : Task<Unit, Unit, Unit>() {
 
-    override fun run(param: Unit) {
+    override fun run(param: Unit): Result<Unit, Unit> {
         if (db.stampDao().count() == 0) {
             val jsonPath = app.resources.getString(R.string.filename_stamp_list_json)
             val stampList = try {
@@ -24,5 +24,6 @@ class InitializeStampTask @Inject constructor(private val app: App,
                 db.stampDao().insertStamp(stamp)
             }
         }
+        return Result.Success(Unit)
     }
 }
