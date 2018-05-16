@@ -19,6 +19,4 @@ abstract class Task<in Param, out R, out F> {
 
         }
     }
-
-    open fun isSuccess(): Boolean = true
 }
