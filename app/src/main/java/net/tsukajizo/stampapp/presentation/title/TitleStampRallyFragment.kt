@@ -48,7 +48,6 @@ class TitleStampRallyFragment : DaggerFragment() {
                 view.ll_collection_complete_view.visibility = View.GONE
             }
         }, {
-            Toast.makeText(activity, "エラー:${it.message}", Toast.LENGTH_SHORT).show()
             // TODO エラー処理を書く
         }, Unit)
         return view
