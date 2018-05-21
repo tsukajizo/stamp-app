@@ -6,7 +6,10 @@ import android.content.pm.PackageManager
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 
-fun checkPermission(activity: Activity, requestCode: Int, callback: PermissionCallback) {
+fun checkPermission(activity: Activity?, requestCode: Int, callback: PermissionCallback) {
+    if (activity == null) {
+        return
+    }
     val permissionCheck = ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA)
     if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
         ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.CAMERA), requestCode)

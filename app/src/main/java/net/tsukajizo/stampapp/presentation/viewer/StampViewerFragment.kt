@@ -57,7 +57,7 @@ class StampViewerFragment : DaggerFragment() {
             //TODO エラー処理を書く
         }, Unit)
 
-        val stampId = arguments.getInt(Constant.BUNDLE_KEY_STAMP_ID, Constant.UNDEFINED_STAMP_ID)
+        val stampId = arguments!!.getInt(Constant.BUNDLE_KEY_STAMP_ID, Constant.UNDEFINED_STAMP_ID)
         if (stampId != Constant.UNDEFINED_STAMP_ID) {
             updateGetStampTask.execute({
                 val item = it.find { stamp -> stamp.id == stampId }
@@ -79,10 +79,13 @@ class StampViewerFragment : DaggerFragment() {
     }
 
     private fun showStampDialog(item: Stamp, title: String = "") {
+        if (activity == null) {
+            return
+        }
         val dialogView = layoutInflater.inflate(R.layout.dialog_view_stamp_detail, null)
         dialogView.tv_title.text = item.label
         dialogView.tv_desc.text = item.desc
-        Glide.with(activity).load(item.getStampPath(activity)).into(dialogView.iv_stamp_image)
+        Glide.with(activity!!).load(item.getStampPath(activity!!)).into(dialogView.iv_stamp_image)
         AlertDialog.Builder(activity).apply {
             setTitle(title)
             setView(dialogView)

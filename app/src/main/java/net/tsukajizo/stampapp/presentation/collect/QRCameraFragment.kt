@@ -35,7 +35,7 @@ class QRCameraFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_qr_camera, container, false)
         barcodeView = view.decorated_barcode_view
         setCapture()
-        checkPermission(activity, REQ_PERMISSION_CAMERA, object : PermissionCallback {
+        checkPermission(activity!!, REQ_PERMISSION_CAMERA, object : PermissionCallback {
             override fun onGranted() {
                 barcodeView?.resume()
             }
@@ -50,7 +50,7 @@ class QRCameraFragment : Fragment() {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     barcodeView?.resume()
                 } else {
-                    activity.finish()
+                    activity?.finish()
                 }
             }
             else -> {
@@ -83,8 +83,8 @@ class QRCameraFragment : Fragment() {
             val bundle = Bundle()
             bundle.putInt(Constant.BUNDLE_KEY_STAMP_ID, id)
             data.putExtras(bundle)
-            activity.setResult(Activity.RESULT_OK, data)
-            activity.finish()
+            activity?.setResult(Activity.RESULT_OK, data)
+            activity?.finish()
         }
     }
 
